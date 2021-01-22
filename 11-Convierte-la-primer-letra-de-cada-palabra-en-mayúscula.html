@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script language="javascript">
+        function Convertir(objeto) {
+            var index;
+            var tmpStr;
+            var tmpChar;
+            var preString;
+            var postString;
+            var strlen;
+            tmpStr = objeto.value.toLowerCase();
+            strLen = tmpStr.length;
+            if (strLen > 0) {
+                for (index = 0; index < strLen; index++) {
+                    if (index == 0) {
+                        tmpChar = tmpStr.substring(0, 1).toUpperCase();
+                        postString = tmpStr.substring(1, strLen);
+                        tmpStr = tmpChar + postString;
+                    }
+                    else {
+                        tmpChar = tmpStr.substring(index, index + 1);
+                        if (tmpChar == " " && index < (strLen - 1)) {
+                            tmpChar = tmpStr.substring(index + 1, index + 2).toUpperCase();
+                            preString = tmpStr.substring(0, index + 1);
+                            postString = tmpStr.substring(index + 2, strLen);
+                            tmpStr = preString + tmpChar + postString;
+                        }
+                    }
+                }
+            }
+            objeto.value = tmpStr;
+        }
+    </script>
+    <form name="ejemplo2" method="GET" action="pagina.htm" target="_blank">
+        Escribe tu nombre: <input type="text" name="campo1" size="15" onKeyUp="Convertir(this.ejemplo2.campo1)">
+        <input type="submit" value="Enviar">
+    </form>
+    <br>
+    <hr>
+
+    <h2>Convierte la primer letra del texto en mayúsculas (al enviar el formulario)</h2>
+    <script language="javascript">
+        function Convertir2(form) {
+            texto = form.campo1.value + " ";
+            texto = texto.toLowerCase();
+            texto1 = "";
+            punc = ",.?!:;)'";
+            punc += '"';
+            while ((texto.length > 0) && (texto.indexOf(" ") > -1)) {
+                pos = texto.indexOf(" ");
+                wrd = texto.substring(0, pos);
+                wrdpre = "";
+                if (punc.indexOf(wrd.substring(0, 1)) > -1) {
+                    wrdpre = wrd.substring(0, 1);
+                    wrd = wrd.substring(1, wrd.length);
+                }
+                cmp = " " + wrd + " ";
+                for (var i = 0; i < 9; i++) {
+                    p = wrd.indexOf(punc.substring(i, i + 1));
+                    if (p == wrd.length - 1) {
+                        cmp = " " + wrd.substring(0, wrd.length - 1) + " ";
+                        i = 9;
+                    }
+                }
+                if (cmp.indexOf(cmp) < 0) {
+                    ltr = wrd.substring(0, 1);
+                    ltr = ltr.toUpperCase();
+                    wrd = ltr + wrd.substring(1, wrd.length);
+                }
+                texto1 += wrdpre + wrd + " ";
+                texto = texto.substring((pos + 1), texto.length);
+            }
+            ltr = texto1.substring(0, 1);
+            ltr = ltr.toUpperCase();
+            texto1 = ltr + texto1.substring(1, texto1.length - 1);
+            form.campo1.value = texto1;
+        }
+    </script>
+
+    <form name="ejemplo3" method="GET" action="pagina.htm" target="_blank">
+        Escribe tu nombre: <input type="text" name="campo1" size="15">
+        <input type="button" value="Enviar" onClick="Convertir2(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Comprueba que el valor ingresado en dos campos no sea el mismo</h2>
+    <script languaje="javascritp">
+        function validarCampos1(form) {
+            if (form.campo1.value == form.campo2.value) {
+                alert("La contraseña no puede ser igual al nombre de usuario");
+                form.campo2.value = ""; form.campo2.focus(); return true;
+            }
+            form.submit()
+        }
+    </script>
+    <form name="ejemplo9" method="POST" action="pagina.htm" target="_blank">
+        Usuario: <input type="text" name="campo1"><br>
+        Contraseña: <input type="password" name="campo2"><br>
+        <input type="button" value="Registrarse" onClick="validarCampos1(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Comprueba que el valor ingresado en dos campos sea igual</h2>
+    <script languaje="javascritp">
+        function validarCampos2(form) {
+            if (form.campo2.value == form.campo1.value) { form.submit(); }
+            else {
+                alert("La repetición de la contraseña no coincide.");
+                form.campo2.value = ""; form.campo2.focus(); return true;
+            }
+        }
+    </script>
+    <form name="ejemplo10" method="POST" action="pagina.htm" target="_blank">
+        Contraseña: <input type="password" name="campo1"><br>
+        Repetir contraseña: <input type="password" name="campo2"><br>
+        <input type="button" value="Registrarse" onClick="validarCampos2(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Permite seleccionar solo una determinada cantidad de checkbox del mismo nombre</h2>
+    <script language="javascript">
+        function limitarSelección(casilla, form) {
+            a = casilla.form.casilla1[0].checked;
+            b = casilla.form.casilla1[1].checked;
+            c = casilla.form.casilla1[2].checked;
+            d = casilla.form.casilla1[3].checked;
+            e = casilla.form.casilla1[4].checked;
+
+            contador = (a ? 1 : 0) + (b ? 1 : 0) + (c ? 1 : 0) + (d ? 1 : 0) + (e ? 1 : 0);
+
+            if (contador > 3) {
+                alert("Solo puedes seleccionar 3 opciones");
+                casilla.checked = false;
+            }
+        }
+    </script>
+
+    <form name="ejemplo11" method="GET" action="pagina.htm" target="_blank">
+        Por favor, seleccione 3 opciones como máximo:<br>
+        <input type="checkbox" name="casilla1" value="Opcion 1" onClick="limitarSelección(this,this.form)">Opción 1<br>
+        <input type="checkbox" name="casilla1" value="Opcion 2" onClick="limitarSelección(this,this.form)">Opción 2<br>
+        <input type="checkbox" name="casilla1" value="Opcion 3" onClick="limitarSelección(this,this.form)">Opción 3<br>
+        <input type="checkbox" name="casilla1" value="Opcion 4" onClick="limitarSelección(this,this.form)">Opción 4<br>
+        <input type="checkbox" name="casilla1" value="Opcion 5" onClick="limitarSelección(this,this.form)">Opción 5<br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Selecciona todos los checkbox con un solo click o los deselecciona</h2>
+    <script language="javascript">
+        function todos(form) {
+            for (i = 0; i < form.casilla1.length; i++)
+                form.casilla1[i].checked = true;
+            form.desmarcatodos.checked = false;
+        }
+
+        function ninguno(form) {
+            for (i = 0; i < form.casilla1.length; i++)
+                form.casilla1[i].checked = false;
+            form.marcatodos.checked = false;
+        }
+    </script>
+    <form name="ejemplo12" method="GET" action="pagina.htm" target="_blank">
+        <input type="checkbox" name="marcatodos" onClick="todos(this.form)">Marcar todos |
+        <input type="checkbox" name="desmarcatodos" onClick="ninguno(this.form)">Desmarcar todos
+        <hr>
+        <input type="checkbox" name="casilla1" value="Opcion 1">Opción 1<br>
+        <input type="checkbox" name="casilla1" value="Opcion 2">Opción 2<br>
+        <input type="checkbox" name="casilla1" value="Opcion 3">Opción 3<br>
+        <input type="checkbox" name="casilla1" value="Opcion 4">Opción 4<br>
+        <input type="checkbox" name="casilla1" value="Opcion 5">Opción 5<br>
+        <hr>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Selecciona todos los checkbox con un solo click o los deselecciona o invierte la selección</h2>
+    <script language="javascript">
+        function todos2(form) {
+            for (i = 0; i < form.casilla1.length; i++)
+                form.casilla1[i].checked = true;
+            form.desmarcatodos.checked = false;
+
+            form.invierte.checked = false;
+        }
+
+        function ninguno2(form) {
+            for (i = 0; i < form.casilla1.length; i++)
+                form.casilla1[i].checked = false;
+            form.marcatodos.checked = false;
+
+            form.invierte.checked = false;
+        }
+
+        function invertir(form) {
+            for (i = 0; i < form.casilla1.length; i++)
+                form.casilla1[i].checked = !form.casilla1[i].checked;
+            form.marcatodos.checked = false;
+
+            form.desmarcatodos.checked = false;
+        }
+    </script>
+    <form name="ejemplo13" method="GET" action="pagina.htm" target="_blank">
+        <input type="checkbox" name="marcatodos" onClick="todos(this.form)">Marcar todos |
+        <input type="checkbox" name="desmarcatodos" onClick="ninguno(this.form)">Desmarcar todos |
+        <input type="checkbox" name="invierte" onClick="invertir(this.form)">Invertir selección
+        <hr>
+        <input type="checkbox" name="casilla1" value="Opcion 1">Opción 1<br>
+        <input type="checkbox" name="casilla1" value="Opcion 2">Opción 2<br>
+        <input type="checkbox" name="casilla1" value="Opcion 3">Opción 3<br>
+        <input type="checkbox" name="casilla1" value="Opcion 4">Opción 4<br>
+        <input type="checkbox" name="casilla1" value="Opcion 5">Opción 5<br>
+        <hr>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Cuenta la cantidad de checkbox o radio que hay seleccionados</h2>
+    <script languaje="javascript">
+        function ContarCasillas(form) {
+            var total = 0;
+            var maximo = form.casilla1.length;
+            for (i = 0; i < maximo; i++)
+                if (form.casilla1[i].checked == true) { total += 1; }
+            alert("Se han seleccionado " + total + " opciones")
+        }
+    </script>
+    <form name="ejemplo14" method="GET" action="pagina.htm" target="_blank">
+        <input type="checkbox" name="casilla1" value="Rojo">Rojo<br>
+        <input type="checkbox" name="casilla1" value="Azul">Azul<br>
+        <input type="checkbox" name="casilla1" value="Amarillo">Amarillo<br>
+        <input type="checkbox" name="casilla1" value="Verde">Verde<br>
+        <input type="button" value="Contar casillas" onClick="ContarCasillas(this.form)">
+    </form>
+
+
+
+</body>
+
+</html>

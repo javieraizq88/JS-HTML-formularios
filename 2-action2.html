@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script language="javascript">
+        function Envio1() {
+            datos.action = "ejemplos/pagina1.asp";
+            datos.submit()
+        }
+        function Envio2() {
+            datos.action = "ejemplos/pagina2.asp";
+            datos.submit()
+        }
+    </script>
+</head>
+
+<body>
+    <form method="GET" name="datos" action="ejemplos/pagina1.asp" target="_blank">
+        Tu nombre: <input type="text" name="nombre"><br>
+        Edad: <input type="text" name="edad" size="2"><br>
+        <input type="button" value="Enviar" onClick="Envio1(this.form); Envio2(this.form)">
+    </form>
+</body>
+
+</html>

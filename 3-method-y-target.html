@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script languaje="javascript">
+
+        function CambiaMethod() {
+            if (form1.POST.checked == true) {
+                form1.method = "POST";
+                form1.action = "ejemplos/procesar.asp"
+            }
+
+            if (form1.GET.checked == true) {
+                form1.method = "GET";
+                form1.action = "ejemplos/procesar1.asp"
+            }
+            form1.submit()
+        }
+
+        function CambiaTarget() {
+            if (form2.blank.checked == true) {
+                form2.target = "_blank";
+            }
+            if (form2.self.checked == true) {
+                form2.target = "_self";
+            }
+            form2.submit()
+        }
+
+    </script>
+
+
+</head>
+
+<body>
+    <form name="form1" method="post" action="ejemplos/procesar.asp" target="_blank">
+        Escribe tu nombre: <input type="text" name="nombre"><br>
+        <input type="checkbox" name="POST" value="ON">Método POST |
+        <input type="checkbox" name="GET" value="ON">Método GET<br>
+        <input type="button" value="Enviar" onClick="CambiaMethod(this.form)">
+    </form>
+
+    <form name="form2" method="post" action="ejemplos/procesar.asp" target="_blank">
+        Escribe tu nombre: <input type="text" name="nombre"><br>
+        <input type="checkbox" name="blank" value="ON">Resultados en nueva ventana |
+        <input type="checkbox" name="self" value="ON">en la misma ventana<br>
+        <input type="button" value="Enviar" onClick="CambiaTarget(this.form)">
+    </form>
+</body>
+
+</html>

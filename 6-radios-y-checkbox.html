@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h2>En este caso se habilitarán o deshabilitarán los checkbox dependiendo de la opción que seleccione el usuario de
+        un grupo de dos radio buttons.</h2>
+
+    <script languaje="javascript">
+        function habilita(form) {
+            form.intereses[0].disabled = false;
+            form.intereses[1].disabled = false;
+            form.intereses[2].disabled = false;
+        }
+
+        function deshabilita(form) {
+            form.intereses[0].disabled = true;
+            form.intereses[1].disabled = true;
+            form.intereses[2].disabled = true;
+        }
+    </script>
+
+    <form name="ejemplo1">
+        ¿Desea suscribirse a nuestro boletín de novedades? <br>
+        <input type="radio" name="boletin" value="si" checked onClick="habilita(this.form)"> SI, quiero suscribirme.
+        <input type="radio" name="boletin" value="no" onClick="deshabilita(this.form)"> No, gracias.
+        <br><br>
+        <input type="checkbox" name="intereses" value="Arte y Cultura"> Arte y Cultura<br>
+        <input type="checkbox" name="intereses" value="Ciencia">Ciencia<br>
+        <input type="checkbox" name="intereses" value="Música">Música<br>
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>En este caso se habilitarán o deshabilitarán los checkbox dependiendo del valor de la propiedad checked de otro
+        checkbox.</h2>
+
+    <script languaje="javascript">
+
+        function habilitaDeshabilita(form) {
+            if (form.boletin.checked == true) {
+                form.intereses[0].disabled = false;
+                form.intereses[1].disabled = false;
+                form.intereses[2].disabled = false;
+            }
+            if (form.boletin.checked == false) {
+                form.intereses[0].disabled = true;
+                form.intereses[1].disabled = true;
+                form.intereses[2].disabled = true;
+            }
+        }
+    </script>
+
+    <form name="ejemplo2">
+        ¿Desea suscribirse a nuestro boletín de novedades? <input type="checkbox" name="boletin" value="ON" checked
+            onClick="habilitaDeshabilita(this.form)"> SI, quiero suscribirme.
+        <br><br>
+        Seleccione los temas de su interés:<br>
+        <input type="checkbox" name="intereses" value="Arte y Cultura"> Arte y Cultura<br>
+        <input type="checkbox" name="intereses" value="Ciencia">Ciencia<br>
+        <input type="checkbox" name="intereses" value="Música">Música<br>
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Información del valor de todas las propiedades</h2>
+    <script languaje="javascript">
+        function informar(form) {
+            nombreCasilla = form.colores[0].name
+            valorCasilla = form.colores[0].value
+
+            valorDisabled = ""
+            valorChecked = ""
+
+            valorLength = form.colores.length
+
+            // definición de valorDisabled
+            if (form.colores[0].disabled == true) { valorDisabled = "está deshabilitada"; }
+            else { valorDisabled = "está habilitada"; }
+
+            // definición de valorChecked
+            if (form.colores[0].checked == true) { valorChecked = "está seleccionada"; }
+            else { valorChecked = "no está seleccionada"; }
+
+            nombreCasillaStr = "El nombre de la primer casilla es: " + nombreCasilla
+            valorCasillaStr = "El valor de la primer casilla es: " + valorCasilla
+            valorDisabledStr = "La primer casilla " + valorDisabled
+            valorCheckedStr = "Esta casilla " + valorChecked
+            valorLengthStr = "La cantidad total de casillas es: " + valorLength
+
+            // escribimos el mensaje de alerta
+            strAlerta = nombreCasillaStr + "\n" + valorCasillaStr + "\n" + valorDisabledStr + "\n" + valorCheckedStr + "\n\n" + valorLengthStr
+
+            // lanzamos la acción
+            alert(strAlerta);
+        }
+    </script>
+
+    <form name="ejemplo1">
+        Colores:
+        Verde <input type="checkbox" name="colores" value="Verde"><br>
+        Azul <input type="checkbox" name="colores" value="Azul" disabled><br>
+        Rojo <input type="checkbox" name="colores" value="Rojo" disabled><br>
+        <input type="button" value="Mostrar información" onClick="informar(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Lanzar una acción si un checkbox no se ha marcado</h2>
+    <script languaje="javascript">
+        function verificarCasilla(form) {
+            if (form.acepto.checked == false) {
+                alert("Debes aceptar los términos del contrato antes de continuar");
+                form.acepto.focus(); return true;
+            }
+            form.submit()
+        }
+    </script>
+
+    <form name="contrato">
+        <b>Formulario de suscripción al servicio de acceso a Internet 0610</b>
+        <br>
+        ... campos del formulario ...<br>
+        ...<br>
+        <input type="checkbox" name="acepto"> Acepto los términos del contrato de suscripción
+        <br>
+        <input type="button" value="Enviar" onClick="verificarCasilla(this.form)">
+    </form>
+
+
+
+</body>
+
+</html>

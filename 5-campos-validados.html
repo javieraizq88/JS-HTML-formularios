@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script languaje="javascript">
+        function validar(form) {
+            var error = "Por favor, antes de enviar el formulario,\ncomplete los siguientes campos:\n\n";
+            var a = ""
+
+            if (form.nombre.value == "") { a += " Nombre real\n"; }
+            if (form.telefono.value == "") { a += " Teléfono\n"; }
+            if (form.ciudad.value == "") { a += " Ciudad\n"; }
+
+            if (a != "") { alert(error + a); return true; }
+
+            form.submit()
+        }
+    </script>
+
+    <form name="ejemplo4" method="POST" target="_blank">
+        <b>Rellena tu perfil de usuario</b> (obligatorio)<br>
+        Nombre real: <input type="text" name="nombre"><br>
+        Teléfono: <input type="text" name="telefono"><br>
+        Ciudad: <input type="text" name="ciudad"><br>
+        <input type="button" value="Terminar" onClick="validar(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>ejemplo 2</h2>
+    <script languaje="javascript">
+        function alerta(campo) { alert("Por favor, completa el campo " + campo) }
+
+        function validar2(form) {
+            if (form.nombre.value == "") {
+                alerta('\"Nombre real\"'); form.nombre.focus(); return true;
+            }
+            if (form.telefono.value == "") {
+                alerta('\"Teléfono\"'); form.telefono.focus(); return true;
+            }
+            if (form.ciudad.value == "") {
+                alerta('\"Ciudad\"'); form.ciudad.focus(); return true;
+            }
+            form.submit()
+        }
+    </script>
+    <form name="ejemplo5" method="POST" target="_blank">
+        <b>Rellena tu perfil de usuario</b> (obligatorio)<br>
+        Nombre real: <input type="text" name="nombre"><br>
+        Teléfono: <input type="text" name="telefono"><br>
+        Ciudad: <input type="text" name="ciudad"><br>
+        <input type="button" value="Terminar" onClick="validar2(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>la informacion de 3 inputs, se guardan en 1</h2>
+
+    <script languaje="javascript">
+        function completar(form) {
+            form.domicilio.value == ""
+            if (form.calle.value != "") {
+                form.domicilio.value += form.calle.value + " ";
+            }
+            if (form.nro.value != "") {
+                form.domicilio.value += "N°" + form.nro.value + ", ";
+            }
+            if (form.piso.value != "") {
+                form.domicilio.value += "Piso " + form.piso.value + " ";
+            }
+            if (form.dto.value != "") {
+                form.domicilio.value += "Dpto. \"" + form.dto.value + "\" - ";
+            }
+            if (form.cp.value != "") {
+                form.domicilio.value += "(" + form.cp.value + ") ";
+            }
+            if (form.ciudad.value != "") {
+                form.domicilio.value += form.ciudad.value + ", ";
+            }
+            if (form.pais.value != "") {
+                form.domicilio.value += form.pais.value;
+            }
+        }
+    </script>
+
+    <form name="ejemplo6" method="POST" action="ejemplos/ej6.asp" target="_blank">
+        Por favor, complete su domicilio:<br>
+        <br>
+        Calle: <input type="text" name="calle" size="40">
+        Nro.: <input type="text" name="nro" size="3"><br>
+        Piso: <input type="text" name="piso" size="2">
+        Departamento: <input type="text" name="dto" size="2"><br>
+        Código Postal: <input type="text" name="cp" size="8">
+        Ciudad: <input type="text" name="ciudad" size="20">
+        País: <input type="text" name="pais" size="20"><br><br>
+        Verifique su domicilio: <input type="text" name="domicilio" size="80" ReadOnly onFocus="completar(this.form)">
+        <br>
+        Si los datos no son correctos, <a onClick="ejemplo6.domicilio.value=''" style="cursor: hand">
+            presione aquí</a> y realice los cambios en los campos correspondientes.<br>
+        <input type="submit" value="Confirmar">
+    </form>
+
+    <br>
+    <hr>
+    <h2>el campo "clave" (password) estará bloqueado si el campo "usuario" (text) se encuentra vacío y se desbloqueará
+        en caso contrario.</h2>
+    <script languaje="javascript">
+        function bloqDesbloq() {
+            a = login.usuario.value
+            if (a != "") { a = true; }
+            else { a = false; }
+            if (a == true) { login.clave.disabled = false; }
+            else { login.clave.disabled = true; }
+        }
+    </script>
+    <form name="login" method="POST" action="pagina_de_login.asp" target="_blank">
+        Usuario: <input type="text" name="usuario" size="10" onKeyUp="bloqDesbloq()"><br>
+        Clave: <input type="password" name="clave" size="10" disabled>
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Si aumenta el valor de length aumenta el tamaño de size</h2>
+    <script languaje="javascript">
+        function aumentarSize() {
+            a = ejemplo9.campo1.value.length;
+            if (a > 6) { ejemplo9.campo1.size = (a + 1); }
+            if (a < 6) { ejemplo9.campo1.size = "6"; }
+        }
+    </script>
+    <form name="ejemplo9">
+        Campo 1: <input type="text" name="campo1" size="6" onKeyUp="aumentarSize()">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>limite minimo de caracteres</h2>
+    <script languaje="javascript">
+        function validarCampo1(form) {
+            if (form.palabra1.value.length < 6) {
+                alert('Debes introducir una palabra con un mínimo de 6 caracteres');
+                form.palabra1.focus(); return true;
+            }
+        }
+    </script>
+
+    <form name="form1" method="post">
+        Mínimo 6 caracteres: <input type="text" name="palabra1">
+        <input type="button" onClick="validarCampo1(this.form)" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>limite maximo de caracteres</h2>
+    <script languaje="javascript">
+        function validarCampo2(form) {
+            if (form.palabra1.value.length > 6) {
+                alert('Debes introducir una palabra con un máximo de 6 caracteres');
+                form.palabra1.focus(); return true;
+            }
+        }
+    </script>
+    <form name="form2" method="post">
+        Máximo 6 caracteres: <input type="text" name="palabra1">
+        <input type="button" onClick="validarCampo2(this.form)" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>limite absoluto de caracteres</h2>
+    <script languaje="javascript">
+        function validarCampo3(form) {
+            if (form.palabra1.value.length != 6) {
+                alert('Debes introducir una palabra de 6 caracteres');
+                form.palabra1.focus(); return true;
+            }
+        }
+    </script>
+    <form name="form3" method="post">
+        Introduce solo 6 caracteres: <input type="text" name="palabra1">
+        <input type="button" onClick="validarCampo3(this.form)" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>limite minimo y maximo de caracteres</h2>
+
+    <script languaje="javascript">
+        function validarCampo4(form) {
+            var a = form.palabra1.value.length
+            if ((a < 6) || (a > 12)) {
+                alert('Debes introducir una palabra con un mínimo de 6 caracteres y un máximo de 12');
+                form.palabra1.focus(); return true;
+            }
+        }
+    </script>
+
+    <form name="form4" method="post">
+        Mínimo 6 caracteres, máximo 12: <input type="text" name="palabra1">
+        <input type="button" onClick="validarCampo4(this.form)" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>cantidad de caracteres escritos y restantes</h2>
+    <script languaje="javascript">
+        function contar(form) {
+            n = form.campo.value.length;
+            t = 50;
+            {
+                form.escritos.value = n;
+                form.restantes.value = (t - n);
+            }
+        }
+    </script>
+    <form name="form5" method="POST">
+        Máximo 50 caracteres: <input type="text" name="campo" size="50" maxlength="50" onKeyUp="contar(this.form)"><br>
+        Escritos: <input type="text" ReadOnly name="escritos" size="2" value="0">
+        Restantes: <input type="text" ReadOnly name="restantes" size="2" value="50">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>caracteres escritos y faltantes</h2>
+    <script languaje="javascript">
+        function validarCampo5(form) {
+            c = 12; // cant. máxima de caracteres
+            L = form.campo.value.length;
+            // e es el excedido
+            // f es el faltante
+
+            if (L > c) { e = (L - c); error = 1; }
+            if (L < c) { f = (c - L); error = -1; }
+
+            if ((L != c) && (error == -1)) {
+                alert("El campo contiene " + f + " caracteres menos a los solicitados");
+                form.campo.focus(); return true;
+            }
+
+            if ((L != c) && (error == 1)) {
+                alert("El campo contiene " + e + " caracteres más a los solicitados");
+                form.campo.focus(); return true;
+            }
+        }
+    </script>
+
+    <form name="form6" method="POST">
+        Escribir solo 12 caracteres: <input type="text" name="campo" size="12"><br>
+        <input type="button" value="Enviar" onClick="validarCampo5(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>convertir letras a mayusculas</h2>
+    <form name="form1" method="POST">
+        Texto: <input type="text" name="txt1" size="20" onKeyUp="form1.txt1.value=form1.txt1.value.toUpperCase()">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>convertir letras en minusculas</h2>
+    <form name="form2" method="POST">
+        Texto: <input type="text" name="txt1" size="20" onKeyUp="form2.txt1.value=form2.txt1.value.toLowerCase()">
+    </form>
+
+    <br>
+    <hr>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>placeholder</h2>
+    <form name="ejemplo1" method="POST">
+        <input type="text" name="usuario" value="Nombre de usuario" onClick="ejemplo1.usuario.value=''" size="16">
+        <br>Password: <input type="password" name="clave" size="6" value="123456" onClick="ejemplo1.clave.value=''">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>copiar texto en otro input</h2>
+    <script languaje="javascript">
+        function pasaValor(form) { ejemplo2.campo2.value = ejemplo2.campo1.value; }
+    </script>
+    <form name="ejemplo2" method="POST">
+        Tu nombre: <input type="text" name="campo1" onKeyUp="pasaValor(this.form)"><br>
+        Nombre introducido: <input type="text" name="campo2" ReadOnly>
+    </form>
+
+
+    <br>
+    <hr>
+    <h2>texto necesario</h2>
+    <script languaje="javascript">
+        function rellenar() {
+            var texto = "No aportado"
+            if (ejemplo3.nombre.value == "") {
+                ejemplo3.nombre.value = texto;
+            }
+            if (ejemplo3.telefono.value == "") {
+                ejemplo3.telefono.value = texto;
+            }
+            if (ejemplo3.ciudad.value == "") {
+                ejemplo3.ciudad.value = texto;
+            }
+            alert("Los campos en blanco se completaron automáticamente");
+            ejemplo3.submit()
+        }
+    </script>
+    <form name="ejemplo3" method="POST" target="_blank">
+        <b>Rellena tu perfil de usuario</b> (opcional)<br>
+        Nombre real: <input type="text" name="nombre"><br>
+        Teléfono: <input type="text" name="telefono"><br>
+        Ciudad: <input type="text" name="ciudad"><br>
+        <input type="button" value="Terminar" onClick="rellenar()">
+    </form>
+
+    <h2>validar campos</h2>
+
+
+</body>
+
+</html>

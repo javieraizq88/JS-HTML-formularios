@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fieldNumber(objeto) {
+            var valorCampo;
+            var evento_key = window.event.keyCode;
+            var numPosPunto = 0;
+            var strParteEntera = "";
+            var strParteDecimal = "";
+            var NUM_DECIMALES = 2;
+
+            switch (evento_key) {
+                case 48:
+                case 49:
+                case 50:
+                case 51:
+                case 52:
+                case 53:
+                case 54:
+                case 55:
+                case 56:
+                case 57:
+                case 46:
+                    break;
+                default:
+                    window.event.keyCode = 0;
+                    return false;
+            }
+
+            valorCampo = objeto.value;
+            if (evento_key == 46)
+                if (valorCampo.indexOf(".") != -1) {
+                    window.event.keyCode = 0;
+                    return false;
+                }
+            /* Sólo puede teclear el número de decimales indicado en NUM_DECIMALES */
+            if ((numPosPunto = valorCampo.indexOf(".")) != -1) {
+                strParteEntera = valorCampo.substr(0, (numPosPunto - 1));
+                strParteDecimal = valorCampo.substr((numPosPunto + 1), valorCampo.length)
+                if (strParteDecimal.length > (NUM_DECIMALES - 1)) {
+                    window.event.keyCode = 0;
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" name="txtImporte" onkeypress="fieldNumber(this)">
+</body>
+
+</html>

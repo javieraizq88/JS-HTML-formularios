@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Aumenta o disminuye un valor</h2>
+    <script languaje="javascript">
+        function validaCantidad(form) {
+            if (form.cantidad.value < 1) {
+                form.cantidad.value = 1;
+                alert("No puede comprar menos de 1 producto");
+            }
+            if (form.cantidad.value > 10) {
+                form.cantidad.value = 10;
+                alert("La cantidad máxima de productos a comprar es de 100 productos");
+            }
+        }
+    </script>
+    <form name="ejemplo15" method="POST" action="pagina.htm" target="_blank">
+        Producto seleccionado: <b>COD. 7548-65 CD-R IPC</b> Cantidad:
+        <input type="text" name="cantidad" value="1" size="2" ReadOnly>
+        <input type="button" value="aumentar" onClick="ejemplo15.cantidad.value++; validaCantidad(this.form)">
+        <input type="button" value="disminuir" onClick="ejemplo15.cantidad.value--;" validaCantidad(this.form)>
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Cuenta la cantidad de palabras introducidas en un textarea</h2>
+    <script languaje="javascript">
+        function contarPalabras(form) {
+            texto = form.mensaje.value
+            texto = texto.split(" ")
+            form.cantidad.value = texto.length
+        }
+    </script>
+    <form name="ejemplo16" method="POST" action="pagina.htm" target="_blank">
+        <b>Por favor, redacte aquí su mensaje</b> Palabras escritas:
+        <input type="text" name="cantidad" value="0" size="2"><br>
+        <textarea rows="4" cols="35" name="mensaje"
+            onKeyPress="contarPalabras(this.form); if (event.keycode1 == 13) form.mensaje.value +=' ';"></textarea><br>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Muestra o esconde el botón "submit"</h2>
+    <script languaje="javascript">
+        function esconde(form) {
+            if ((form.nombre.value != "") && (form.apellido.value != "")) { form.enviar.style.visibility = "visible"; }
+            else {
+                form.enviar.style.visibility = "hidden";
+            }
+        }
+    </script>
+    <form name="ejemplo17" method="POST" action="pagina.htm" target="_blank">
+        Nombre: <input type="text" name="nombre" size="20" onKeyUp="esconde(this.form)"><br>
+        Apellido: <input type="text" name="apellido" size="20" onKeyUp="esconde(this.form)"><br>
+        <input type="submit" name="enviar" value="Enviar" style="visibility: hidden">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2> Habilita o deshabilita el botón "submit". Deshabilita el botón submit si los campos están vacíos</h2>
+    <script languaje="javascript">
+        function deshabilita(form) {
+            if ((form.nombre.value != "") && (form.apellido.value != "")) { form.enviar.disabled = false; }
+            else {
+                form.enviar.disabled = true;
+            }
+        }
+    </script>
+    <form name="ejemplo18" method="POST" action="pagina.htm" target="_blank">
+        Nombre: <input type="text" name="nombre" size="20" onKeyUp="deshabilita(this.form)"><br>
+        Apellido: <input type="text" name="apellido" size="20" onKeyUp="deshabilita(this.form)"><br>
+        <input type="submit" name="enviar" value="Enviar" disabled>
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Mensaje de confirmación al borrar un formulario</h2>
+    <script languaje="javascript">
+        function ConfirmarBorrado(form) {
+            borrar = window.confirm('Se borrarán todos los datos del formulario');
+            (borrar) ? form.reset() : 'return false';
+        }
+    </script>
+    <form name="ejemplo19" method="POST" action="pagina.htm" target="_blank">
+        Nombre: <input type="text" name="nombre" size="20"><br>
+        Apellido: <input type="text" name="apellido" size="20"><br>
+        <input type="button" value="Borrar" onClick="ConfirmarBorrado(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Mensaje de confirmación al enviar un formulario</h2>
+    <script languaje="javascript">
+        function ConfirmarEnvio(form) {
+            enviar = window.confirm('Se enviarán todos los datos del formulario');
+            (enviar) ? form.submit() : 'return false';
+        }
+    </script>
+    <form name="ejemplo20" method="POST" action="pagina.htm" target="_blank">
+        Nombre: <input type="text" name="nombre" size="20"><br>
+        Apellido: <input type="text" name="apellido" size="20"><br>
+        <input type="button" value="Enviar" onClick="ConfirmarEnvio(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2></h2>
+
+</body>
+
+</html>

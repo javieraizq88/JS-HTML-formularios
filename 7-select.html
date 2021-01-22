@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Trabajando con la propiedad disabled</h2>
+    <script languaje="javascript">
+        function habilitar(form) {
+            if (form.productos[0].selected == true) {
+                form.cantidad.disabled = true;
+            }
+            else {
+                form.cantidad.disabled = false;
+            }
+        }
+    </script>
+
+    <form name="ejemplo1" method="POST" target="_blank" action="pagina.htm">
+        <select name="productos" onChange="habilitar(this.form)">
+            <option value="">[Seleccione un producto]</option>
+            <option value="COD 001">COD 001: Producto 1</option>
+            <option value="COD 002">COD 002: Producto 2</option>
+            <option value="COD 003">COD 003: Producto 3</option>
+        </select>
+        <select name="cantidad" disabled>
+            <option value="">[cantidad]</option>
+            <option value="5">5 unidades</option>
+            <option value="10">10 unidades</option>
+            <option value="15">15 unidades</option>
+        </select>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Trabajando con el constructor new Option</h2>
+    <script language="javascript">
+        function agregarOpciones(form) {
+            var selec = form.tipos.options;
+            var combo = form.estilo.options;
+            combo.length = null;
+
+            if (selec[0].selected == true) {
+                var seleccionar = new Option("<-- esperando selección", "", "", "");
+                combo[0] = seleccionar;
+            }
+
+            if (selec[1].selected == true) {
+                var popular1 = new Option("Rock de los 90", "Rock1", "", "");
+                var popular2 = new Option("Rock de los 80", "Rock2", "", "");
+                combo[0] = popular1;
+                combo[1] = popular2;
+            }
+
+            if (selec[2].selected == true) {
+                var academica1 = new Option("Musica del Barroco", "Barroco", "", "");
+                var academica2 = new Option("Musica del Siglo XX", "Siglo XX", "", "");
+                var academica3 = new Option("Música del Romantisismo", "Romantico", "", "");
+                combo[0] = academica1;
+                combo[1] = academica2;
+                combo[2] = academica3;
+            }
+        }
+    </script>
+
+    <form name="ejemplo2" method="POST" target="_blank" action="pagina.htm">
+        <select name="tipos" onChange="agregarOpciones(this.form)">
+            <option value="">[seleccione una opción]</option>
+            <option value="musicapopular">Música Popular (Rock)</option>
+            <option value="musicaacademica">Música Académica</option>
+        </select>
+        <select name="estilo">
+            <option value="">
+                -- esperando selección</option>
+        </select>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Validar un select</h2>
+    <script languaje="javascript">
+        function validar(form) {
+            if (form.combo1.options[form.combo1.selectedIndex].value == "") {
+                alert("Por favor, seleccione una opción válida");
+                form.combo1.focus(); return true;
+            }
+            form.submit();
+        }
+    </script>
+
+    <form name="ejemplo3" method="POST" target="_blank" action="pagina.htm">
+        <select name="combo1">
+            <option value=" ">[seleccione una opción]</option>
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+            <option value="opcion3">Opción 3</option>
+        </select>
+        <input type="button" value="Enviar" onClick="validar(this.form)">
+    </form>
+
+    <br>
+    <hr>
+
+    <h2>Modificar la propiedad text de un option</h2>
+
+    <script languaje="javascript">
+        function modificarTexto(form) {
+            var selec = form.opciones.options;
+            if (select[0].selected == true) {
+                selec[0].text = "Esta no es una opción válida"; form.opciones.focus();
+            }
+            else {
+                select[form.opciones.selectedIndex].text = "Presione el botón enviar";
+            }
+        }
+    </script>
+
+    <form name="ejemplo4" method="POST" target="_blank" action="pagina.htm">
+        <select name="opciones" onChange="modificarTexto(this.form)">
+            <option value=" ">[seleccione una opción]</option>
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+            <option value="opcion3">Opción 3</option>
+        </select>
+        <input type="submit" value="Enviar">
+    </form>
+
+<br>
+<hr>
+
+<h2></h2>
+
+</body>
+
+</html>

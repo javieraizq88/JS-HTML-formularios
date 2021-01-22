@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h2>method POST</h2>
+    <form name="datos" action="ejemplos/procesar.asp" method="POST" target="_blank">
+        Escribe tu nombre: <input type="text" name="nombre"><br>
+        <input type="submit" value="enviar formulario"><br>
+        <input type="reset" value="borrar">
+    </form>
+
+    <h2>method GET</h2>
+    <form name="datos1" action="ejemplos/procesar1.asp" method="GET" target="_blank">
+        Escribe tu nombre: <input type="text" name="nombre"><br>
+        <input type="submit" value="enviar formulario"><br>
+        <input type="reset" value="borrar">
+    </form>
+
+    <h2>Sub-propiedades del objeto form y eventos</h2>
+    <form name="formulario" method="post" action="ejemplos/procesar.asp" target="_blank"
+        onSubmit="alert('Se enviará el formulario')" onReset="alert('Se borrarán todos los datos insertados')">
+        Escribe tu nombre: <input type="text" name="nombre"><br>
+        <input type="submit" value="Enviar">
+        <input type="reset" value="Borrar">
+    </form>
+
+
+    
+</body>
+
+</html>
